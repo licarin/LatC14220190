@@ -8,35 +8,23 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 
-class pageEdit : AppCompatActivity() {
+class pageTambah : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_page_edit)
+        setContentView(R.layout.activity_page_tambah)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val editData = intent.getParcelableExtra<task>("editData", task::class.java)
-        val position = intent.getIntExtra("pos", -1)
-
         var _namaIn = findViewById<EditText>(R.id.inputNama)
         var _tanggalIn = findViewById<EditText>(R.id.inputTanggal)
         var _kategoriIn = findViewById<EditText>(R.id.inputKategori)
         var _deskripsiIn = findViewById<EditText>(R.id.inputDeskripsi)
-
-        val dateFormat = SimpleDateFormat("dd/MM/yyyy")
-        val dateString = dateFormat.format(editData?.tanggal)
-
-        _namaIn.setText(editData?.nama)
-        _tanggalIn.setText(dateString)
-        _kategoriIn.setText(editData?.kategori)
-        _deskripsiIn.setText(editData?.deskripsi)
 
         var _confirmBtn = findViewById<Button>(R.id.btnSave)
         _confirmBtn.setOnClickListener {
@@ -57,16 +45,14 @@ class pageEdit : AppCompatActivity() {
                 _tanggal,
                 _kategoriIn.text.toString(),
                 _deskripsiIn.text.toString(),
-                editData?.status.toString()
+                "Kerjakan"
             )
 
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("editData", data)
-            intent.putExtra("pos", position)
+            val intent = Intent(this, MainActivity::class.java).apply {
+                putExtra("entryData", data)
+            }
 
             startActivity(intent)
         }
-
     }
-
 }

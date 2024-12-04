@@ -13,10 +13,10 @@
         android:theme="@style/Theme.Latihan"
         tools:targetApi="31">
         <activity
-            android:name=".pageEdit"
+            android:name=".pageTambah"
             android:exported="false" />
         <activity
-            android:name=".edit"
+            android:name=".pageEdit"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
